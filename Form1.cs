@@ -1,8 +1,8 @@
-namespace WinFormsApp2
+namespace WinFormsApp3
 {
     public partial class Form1 : Form
     {
-        TextBox textBox1, textBox2;
+        TextBox textBox1;
         Button button1;
         Label label1;
 
@@ -18,13 +18,9 @@ namespace WinFormsApp2
             textBox1.Location = new System.Drawing.Point(20, 20);
             Controls.Add(textBox1);
 
-            textBox2 = new TextBox();
-            textBox2.Location = new System.Drawing.Point(120, 20);
-            Controls.Add(textBox2);
-
             button1 = new Button();
-            button1.Text = "Помножити";
-            button1.Location = new System.Drawing.Point(220, 18);
+            button1.Text = "Перевірити";
+            button1.Location = new System.Drawing.Point(150, 18);
             button1.Click += button1_Click;
             Controls.Add(button1);
 
@@ -36,15 +32,24 @@ namespace WinFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double a, b;
+            int grade;
 
-            if (double.TryParse(textBox1.Text, out a) && double.TryParse(textBox2.Text, out b))
+            if (int.TryParse(textBox1.Text, out grade))
             {
-                label1.Text = "Результат: " + (a * b).ToString();
+                if (grade >= 1 && grade <= 3)
+                    label1.Text = "Початковий рівень";
+                else if (grade >= 4 && grade <= 6)
+                    label1.Text = "Середній рівень";
+                else if (grade >= 7 && grade <= 9)
+                    label1.Text = "Достатній рівень";
+                else if (grade >= 10 && grade <= 12)
+                    label1.Text = "Високий рівень";
+                else
+                    MessageBox.Show("Помилка! Оцінка має бути від 1 до 12.");
             }
             else
             {
-                MessageBox.Show("Помилка! Введіть правильні числа.");
+                MessageBox.Show("Помилка! Введіть число.");
             }
         }
     }
